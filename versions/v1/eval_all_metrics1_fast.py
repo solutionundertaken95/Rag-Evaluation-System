@@ -3,6 +3,14 @@ from deepeval.metrics import AnswerRelevancyMetric,FaithfulnessMetric,Contextual
 from deepeval.test_case import LLMTestCase, SingleTurnParams
 from deepeval.evaluate import CacheConfig
 from deepeval import evaluate
+from deepeval.models import GeminiModel
+from dotenv import load_dotenv
+
+load_dotenv()
+
+gemini_model = GeminiModel(
+    model="gemini-3.6-flash"
+)
 
 with open("results1.jsonl", "r", encoding="utf-8") as file:
     results = [json.loads(line) for line in file]
@@ -28,9 +36,9 @@ for i, result in enumerate(results, start=1):
 
     questions_tests.append(test_case)
 
-answer_relevancy = AnswerRelevancyMetric(threshold=0.7)
-faithfulness = FaithfulnessMetric(threshold=0.7)
-context_relevancy= ContextualRelevancyMetric(threshold=0.7)
+answer_relevancy = AnswerRelevancyMetric(threshold=0.7,model=gemini_model)
+faithfulness = FaithfulnessMetric(threshold=0.7,model=gemini_model)
+context_relevancy= ContextualRelevancyMetric(threshold=0.7,model=gemini_model)
 correctness = GEval(
             name="Correctness",
             criteria=(
@@ -40,7 +48,7 @@ correctness = GEval(
                 SingleTurnParams.ACTUAL_OUTPUT,
                 SingleTurnParams.EXPECTED_OUTPUT
             ],
-            threshold=0.7
+            threshold=0.7,model=gemini_model
             )
 
 evaluation_results = evaluate(
