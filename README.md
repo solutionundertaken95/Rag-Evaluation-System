@@ -45,11 +45,7 @@ The `versions/vN` folders are not separate RAG implementations. Each runner impo
 
 The root evaluation summaries contain one JSON object each, despite the `.jsonl` extension. These are the checked-in averages over 20 cases:
 
-| Summary file | Run label | Saved retriever `k` | Answer relevancy | Faithfulness | Context relevancy | Correctness |
-|---|---|---:|---:|---:|---:|---:|
-| [`experiment_v1.jsonl`](experiment_v1.jsonl) | `experiment_v1_k3` | 3 | 0.988 | 1.000 | 0.733 | 0.900 |
-| [`experiment_v2.jsonl`](experiment_v2.jsonl) | `experiment_v2_k1` | 3 | 1.000 | 1.000 | 0.781 | 0.915 |
-| [`experiment_v3.jsonl`](experiment_v3.jsonl) | `experiment_v3_k2` | 3 | 1.000 | 1.000 | 0.787 | 0.890 |
+![alt text](image.png)
 
 These are saved snapshots, not guaranteed reproducible scores. DeepEval metrics use LLM judges, so reruns can vary. The dashboard displays the run labels and `retriever_k` values exactly as stored.
 
@@ -97,7 +93,7 @@ The metric scripts use a `0.7` threshold. The `*_fast.py` scripts batch the eval
 |---|---|
 | Python 3.12+ | Required by [`pyproject.toml`](pyproject.toml) |
 | `uv` | Installs and runs the locked environment |
-| OpenAI API key | Needed for embeddings, answer generation, and DeepEval judge calls |
+| Gemini API key | Needed for embeddings, answer generation, and DeepEval judge calls |
 
 Install dependencies from the repository root:
 
@@ -120,7 +116,7 @@ Repeat the same pattern in `versions/v1` or `versions/v3` to summarize another s
 Create a `.env` file in the repository root:
 
 ```env
-OPENAI_API_KEY=your_openai_api_key_here
+GEMINI_API_KEY=your_gemini_api_key_here
 ```
 
 Run a single metric example:
@@ -168,19 +164,19 @@ uv run streamlit run dashboard.py
 
 The first view shows all saved evaluation runs and their four metric averages:
 
-![Dashboard table of the three saved evaluation runs](screenshots/Screenshot_1.png)
+![alt text](image-1.png)
 
 The metric comparison chart stacks the four scores for each run:
 
-![Metric comparison chart for the three saved runs](screenshots/Screenshot_4.png)
+![alt text](image-2.png)
 
 Use the run inspector to focus on one saved run at a time:
 
-![Run inspector showing retriever k, test count, and metric scores](screenshots/Screenshot_2.png)
+![alt text](image-3.png)
 
 The final table highlights the best saved run for each metric:
 
-![Best score by metric table](screenshots/Screenshot_3.png)
+![alt text](image-4.png)
 
 ## Project Map
 
