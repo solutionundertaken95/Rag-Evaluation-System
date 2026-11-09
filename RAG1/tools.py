@@ -1,0 +1,26 @@
+from indexing import vector_store
+from langchain.tools import tool
+
+last_retrieved_context = []
+
+
+@tool
+def collecting_info(query: str) -> str:
+    """
+    Search the PDF knowledge base and return
+    the most relevant information.
+    """
+
+    global last_retrieved_context
+
+    docs = vector_store.similarity_search(
+        query=query,
+        k=2
+    )
+
+    last_retrieved_context = [
+        doc.page_content
+        for doc in docs
+    ]
+
+    return "\n\n".join(last_retrieved_context)

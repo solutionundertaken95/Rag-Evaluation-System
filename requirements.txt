@@ -1,0 +1,13 @@
+langgraph
+langchain
+python-dotenv
+langchain-google-genai
+langchain-community
+langgraph-cli
+langgraph-cli[inmem]
+colorama
+langchain-huggingface
+langchain-text-splitters
+langchain-tavily
+pinecone
+sentence-transformers
